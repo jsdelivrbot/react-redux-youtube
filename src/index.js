@@ -1,15 +1,13 @@
 import React from 'react';
+//To render components onto the DOM, have to use react-dom
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
 
-import App from './components/app';
-import reducers from './reducers';
+const App = () => {
+  return <div>Home</div>;
+}
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
-
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+//JSX returns an instance of the class component - instances
+//are created via React.createElement implicitely in the lib.  By passing
+//render a JSX syntax it instantiates the class
+//ReactDom.render takes a 2nd argument which is a reference to a DOM node on the page
+ReactDOM.render(<App />, document.querySelector('.container'));
