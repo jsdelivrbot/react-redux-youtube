@@ -2,8 +2,16 @@ import React from 'react';
 //To render components onto the DOM, have to use react-dom
 import ReactDOM from 'react-dom';
 
+import SearchBar from './components/search_bar';
+
+//Youtube Data Browser API Key
+const API_KEY = 'AIzaSyDZ0QhwCDWi7ZHcFLKIUyUA0yZf2AaLMw8';
+
 const App = () => {
-  return <div>Home</div>;
+  return (<div>
+    <SearchBar />
+  </div>
+  );
 }
 
 //JSX returns an instance of the class component - instances
