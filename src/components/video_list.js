@@ -6,7 +6,8 @@ const VideoList = (props) => {
 
     //iterate through all the videos and return a videolistitem component
     const videoItems = props.videos.map((video) => {
-        return <VideoListItem video={video} />
+        // the etag property passed to the videolistitem is a unique identifier returned from youtube
+        return <VideoListItem key={video.etag} video={video} />
     });
 
     return (
