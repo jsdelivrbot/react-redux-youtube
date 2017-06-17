@@ -1,17 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 //To render components onto the DOM, have to use react-dom
 import ReactDOM from 'react-dom';
+import YTSearch from 'youtube-api-search';
 
 import SearchBar from './components/search_bar';
+import VideoList from './components/video_list';
 
 //Youtube Data Browser API Key
 const API_KEY = 'AIzaSyDZ0QhwCDWi7ZHcFLKIUyUA0yZf2AaLMw8';
 
-const App = () => {
-  return (<div>
-    <SearchBar />
-  </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    //main app state has a prop of a list of videos
+    this.state = { videos: [] };
+
+    //grabbing a first list of videos on app instantiation
+    YTSearch({ key: API_KEY, term: 'dota2' }, (videos) => {
+      // *quick note: when the key and property are the same, you can reduce it to the one term in ES6 - videos in this case
+      this.setState({ videos });
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <SearchBar />
+        <VideoList videos={this.state.videos} />
+      </div>
+    );
+  }
 }
 
 //JSX returns an instance of the class component - instances
