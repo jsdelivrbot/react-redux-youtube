@@ -15,12 +15,18 @@ class App extends Component {
     super(props);
 
     //main app state has a prop of a list of videos
-    this.state = { videos: [] };
+    this.state = {
+      videos: [],
+      selectedVideo: null
+    };
 
     //grabbing a first list of videos on app instantiation
     YTSearch({ key: API_KEY, term: 'dota2' }, (videos) => {
       // *quick note: when the key and property are the same, you can reduce it to the one term in ES6 - videos in this case
-      this.setState({ videos });
+      this.setState({
+        videos: videos,
+        selectedVideo: videos[0]
+      });
     });
   }
 
@@ -28,8 +34,11 @@ class App extends Component {
     return (
       <div>
         <SearchBar />
-        <VideoDetail video={this.state.videos[0]} />
-        <VideoList videos={this.state.videos} />
+        <VideoDetail video={this.state.selectedVideo} />
+        <VideoList
+          onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
+          videos={this.state.videos}
+        />
       </div>
     );
   }
