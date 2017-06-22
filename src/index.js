@@ -20,8 +20,12 @@ class App extends Component {
       selectedVideo: null
     };
 
+    this.videoSearch('dota2');
+  }
+
+  videoSearch(term) {
     //grabbing a first list of videos on app instantiation
-    YTSearch({ key: API_KEY, term: 'dota2' }, (videos) => {
+    YTSearch({ key: API_KEY, term: term }, (videos) => {
       // *quick note: when the key and property are the same, you can reduce it to the one term in ES6 - videos in this case
       this.setState({
         videos: videos,
@@ -33,12 +37,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <SearchBar />
+        <SearchBar onSearchTermChange={term => this.videoSearch(term)}/>
         <VideoDetail video={this.state.selectedVideo} />
         <VideoList
           onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
           videos={this.state.videos}
-        />
+          />
       </div>
     );
   }
